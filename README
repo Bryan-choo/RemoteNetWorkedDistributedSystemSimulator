@@ -1,0 +1,7 @@
+step1. install the environment of Java
+step2. To Simply test the NetWorked Distributed System Simulator:
+			Run the Test class in the package: com.coursework.nds.Test which offer the sample way of running the Simulator
+step3. To evaluate the NetWorked Distributed System Simulator:
+			We offer two evaluation class in the package com.coursework.evaluation:
+					1. CorrectnessEvaluation class: used to test the correctness of LCR and HS
+					2. PerformanceEvaluation class: used to test the Performance of LCR and HS which includes time, messages and rounds
