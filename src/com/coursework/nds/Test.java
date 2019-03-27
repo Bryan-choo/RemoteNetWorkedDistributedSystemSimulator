@@ -43,5 +43,6 @@ public class Test {
 		long hsTime = hsendTime - hsstarTime;
 		System.out.println("HS: leader id: " + leader1.myID +" max_id: "+maxid1+ " total_rounds: "
 				+ simulator1.total_rounds + " time: " + hsTime);
+		System.out.println(Runtime.getRuntime().availableProcessors());
 	}
 }
