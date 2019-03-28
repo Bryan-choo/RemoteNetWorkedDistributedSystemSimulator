@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 public class NioServerBoss extends AbstractNioSelector implements Boss {
 
 	private static final Logger logger = Logger.getLogger(NioServerBoss.class.getName());
-	public NioServerBoss(Executor executor, String threadName) {
-		super(executor, threadName);
+	public NioServerBoss(Executor executor, String threadName, NioSelectorRunnablePool pool) {
+		super(executor, threadName, pool);
 	}
 	@Override
 	protected void process(Selector selector) throws IOException {
@@ -30,7 +30,9 @@ public class NioServerBoss extends AbstractNioSelector implements Boss {
 			if (next.isAcceptable() && next.isValid()) {
 				SocketChannel sChannel = serverChannel.accept();
 				logger.info("request from client...");
-				sChannel.register(selector, SelectionKey.OP_READ);
+				sChannel.configureBlocking(false);
+				this.pool.nextWorker().registerNewChannel(sChannel);
+//				sChannel.register(selector, SelectionKey.OP_READ);
 			}
 		}
 

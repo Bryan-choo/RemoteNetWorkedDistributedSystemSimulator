@@ -15,6 +15,8 @@ public abstract class AbstractNioSelector implements Runnable {
 	
 	protected Selector selector;
 	
+	protected NioSelectorRunnablePool pool;
+	
 	protected final AtomicBoolean wakeUp = new AtomicBoolean();
 	
 //	private final LinkedList<Runnable> taskQueue = (LinkedList<Runnable>) Collections.synchronizedList(new LinkedList<Runnable>());
@@ -22,9 +24,10 @@ public abstract class AbstractNioSelector implements Runnable {
 	
 	private String threadName;
 	
-	public AbstractNioSelector(Executor executor, String threadName) {
+	public AbstractNioSelector(Executor executor, String threadName, NioSelectorRunnablePool pool) {
 		this.executor = executor;
 		this.threadName = threadName;
+		this.pool = pool;
 		this.openSelector();
 	}
 	
@@ -45,7 +48,12 @@ public abstract class AbstractNioSelector implements Runnable {
 		
 		while (true) {
 			wakeUp.set(false);
-			
+			try {
+				this.selector.select(500);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			processTaskQueue();
 			
 			try {

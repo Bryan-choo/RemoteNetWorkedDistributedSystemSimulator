@@ -1,6 +1,10 @@
 package com.coursework.evaluation;
 
-public class PerformanceEntry {
+import java.io.Serializable;
+
+public class PerformanceEntry implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	public int Processors;
 	public double maxTime;
 	public double minTime;

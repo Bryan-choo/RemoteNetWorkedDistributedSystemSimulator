@@ -19,14 +19,14 @@ public class NioSelectorRunnablePool {
 	private void initBosses(Executor bossExecutor, int count) {
 		this.bosses = new NioServerBoss[count];
 		for (int i = 0; i < bosses.length; i++) {
-			this.bosses[i] = new NioServerBoss(bossExecutor, "boss thread "+(i+1));
+			this.bosses[i] = new NioServerBoss(bossExecutor, "boss thread "+(i+1), this);
 		}
 	}
 	
 	private void initWorkers(Executor workerExecutor, int count) {
 		this.workers = new NioServerWorker[count];
 		for (int i = 0; i < workers.length; i++) {
-			this.workers[i] = new NioServerWorker(workerExecutor, "worker thread "+(i+1));
+			this.workers[i] = new NioServerWorker(workerExecutor, "worker thread "+(i+1), this);
 		} 
 	}
 	
