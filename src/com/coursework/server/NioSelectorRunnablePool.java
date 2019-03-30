@@ -1,6 +1,7 @@
-package com.coursework.connection;
+package com.coursework.server;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NioSelectorRunnablePool {
@@ -11,9 +12,12 @@ public class NioSelectorRunnablePool {
 	private final AtomicInteger workerIndex = new AtomicInteger();
 	private Worker[] workers;
 	
-	public NioSelectorRunnablePool(Executor bossExecutor, Executor workerExecutor) {
+	public final ExecutorService evaluationThreadPool;
+	
+	public NioSelectorRunnablePool(Executor bossExecutor, Executor workerExecutor, Executor evaluationExecutor) {
 		this.initBosses(bossExecutor, 1);
 		this.initWorkers(workerExecutor, 2);
+		this.evaluationThreadPool = (ExecutorService) evaluationExecutor;
 	}
 	
 	private void initBosses(Executor bossExecutor, int count) {

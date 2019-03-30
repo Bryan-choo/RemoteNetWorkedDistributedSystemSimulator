@@ -1,4 +1,4 @@
-package com.coursework.connection;
+package com.coursework.server;
 
 import java.io.IOException;
 import java.nio.channels.Selector;

@@ -183,6 +183,9 @@ public class PerformanceEvaluation {
 			
 		}
 		
+		public HashMap<String, List<PerformanceEntry>> doevaluate(NDSSimulator.IDGenerationStrategy strategy) {
+			return this.evaluateWithSpecifyIDGenerationStrategy(strategy);
+		}
 		public void evaluate() {
 			
 			System.out.println("start evaluate HS and LCR with random id generation strategy in: "+this.maxSize+" batches and 100 times per batch ====>");

@@ -1,4 +1,4 @@
-package com.coursework.connection;
+package com.coursework.server;
 
 import java.nio.channels.SocketChannel;
 
